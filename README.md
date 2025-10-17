@@ -10,6 +10,34 @@ To run the server:
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
+## File structure output
+
+```bash
+data/
+  Paris/
+    2025-10-17.parquet
+  Tokyo/
+    2025-10-17.parquet
+  ...
+```
+
+## ⏰ Set up the Cron Job
+
+Open crontab:
+```bash
+
+crontab -e
+```
+
+Add the job:
+```
+*/5 * * * * /usr/bin/python3 /path/to/aqair_cron.py >> /path/to/cron.log 2>&1
+```
+
+> [!NOTE]
+> Adjust /usr/bin/python3 and script path accordingly
+
+
 ## Write Data from Local Sensor
 
 Ingest endpoint will write data to parquet file with a single file per day

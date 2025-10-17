@@ -2,10 +2,12 @@ import requests
 import datetime
 import os
 import pandas as pd
+from dotenv import load_dotenv
 
-# === Configuration ===
-API_KEY = "your_api_key_here"  # Replace with your actual IQAir API key
 
+# === Load .env variables ===
+load_dotenv()
+API_KEY = os.getenv("IQAIR_API_KEY")  # 👈 Read API key from .env
 # Cities to query (city, state, country)
 cities = [
     ("Los Angeles", "California", "USA"),
