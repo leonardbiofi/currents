@@ -1,6 +1,9 @@
 annotated-types==0.7.0
 anyio==4.11.0
+click==8.3.0
+duckdb==1.4.1
 fastapi==0.119.0
+h11==0.16.0
 idna==3.11
 numpy==2.3.4
 pandas==2.3.3
@@ -15,3 +18,4 @@ starlette==0.48.0
 typing-inspection==0.4.2
 typing_extensions==4.15.0
 tzdata==2025.2
+uvicorn==0.37.0
