@@ -31,7 +31,12 @@ crontab -e
 
 Add the job:
 ```
-*/5 * * * * /usr/bin/python3 /path/to/aqair_cron.py >> /path/to/cron.log 2>&1
+*/5 * * * * /usr/bin/python3 /src/cron/iqair_cron.py >> /path/to/cron.log 2>&1
+```
+
+Run the script just one time:
+```bash
+python src/cron/iqair_cron.py
 ```
 
 > [!NOTE]

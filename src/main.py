@@ -10,9 +10,14 @@ from typing import Optional
 
 app = FastAPI()
 
-BASE_DATA_DIR = "data"
+
+SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
+
+# Base Data dir
+BASE_DATA_DIR = os.path.join(SCRIPT_DIR, "data")
 os.makedirs(BASE_DATA_DIR, exist_ok=True)
 
+# Local sensor
 LOCAL_DATA_DIR = os.path.join(BASE_DATA_DIR, "local")
 os.makedirs(LOCAL_DATA_DIR, exist_ok=True)
 

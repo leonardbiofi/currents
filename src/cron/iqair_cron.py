@@ -4,10 +4,13 @@ import os
 import pandas as pd
 from dotenv import load_dotenv
 
+SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
+DATA_DIR = os.path.join(SCRIPT_DIR, "..", "data")
 
 # === Load .env variables ===
 load_dotenv()
-API_KEY = os.getenv("IQAIR_API_KEY")  # 👈 Read API key from .env
+API_KEY = os.getenv("IQAIR_API_KEY")
+
 # Cities to query (city, state, country)
 cities = [
     ("Los Angeles", "California", "USA"),
@@ -18,10 +21,9 @@ cities = [
 ]
 
 # Logging
-LOG_DIR = "aqair_logs"
-DATA_DIR = "data"  # Root directory for parquet files
-os.makedirs(LOG_DIR, exist_ok=True)
-LOG_FILE = os.path.join(LOG_DIR, "air_quality_log.txt")
+# LOG_DIR = "aqair_logs"
+# os.makedirs(LOG_DIR, exist_ok=True)
+# LOG_FILE = os.path.join(LOG_DIR, "air_quality_log.txt")
 
 
 def get_air_quality(city, state, country):
@@ -46,17 +48,17 @@ def get_air_quality(city, state, country):
         return {"city": city, "error": str(e)}
 
 
-def log_data(entries):
-    timestamp = datetime.datetime.utcnow().isoformat()
-    with open(LOG_FILE, "a") as f:
-        f.write(f"\n=== Data fetched at {timestamp} UTC ===\n")
-        for entry in entries:
-            if "error" in entry:
-                f.write(f"{entry['city']}: ERROR - {entry['error']}\n")
-            else:
-                f.write(
-                    f"{entry['city']}: AQI={entry['aqi']} | Main Pollutant={entry['main_pollutant']} | Time={entry['timestamp']}\n"
-                )
+# def log_data(entries):
+#     timestamp = datetime.datetime.utcnow().isoformat()
+#     with open(LOG_FILE, "a") as f:
+#         f.write(f"\n=== Data fetched at {timestamp} UTC ===\n")
+#         for entry in entries:
+#             if "error" in entry:
+#                 f.write(f"{entry['city']}: ERROR - {entry['error']}\n")
+#             else:
+#                 f.write(
+#                     f"{entry['city']}: AQI={entry['aqi']} | Main Pollutant={entry['main_pollutant']} | Time={entry['timestamp']}\n"
+#                 )
 
 
 def write_to_parquet(entry):
@@ -89,7 +91,7 @@ def main():
         if "error" not in result:
             write_to_parquet(result)
 
-    log_data(results)
+    # log_data(results)
 
 
 if __name__ == "__main__":
